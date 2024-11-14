@@ -7,6 +7,6 @@ class RangeField {
 }
 
 export const RenderExtension = {
-  __init__: ["rangeField", "plotterField"],
+  __init__: ["rangeField"],
   rangeField: ["type", RangeField],
 };
