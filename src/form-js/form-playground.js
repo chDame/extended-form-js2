@@ -8,4 +8,4 @@ export class FormPlayground extends BaseForm {
   }
 }
 
-export default Form;
+export default FormPlayground;
