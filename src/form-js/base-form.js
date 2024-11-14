@@ -28,6 +28,10 @@ class BaseForm {
     console.info("Schema saved:", result);
     return result;
   }
+  
+  destroy() {
+	  this.customForm.destroy();
+  }
 
   on(event, ...args) {
     console.log(`Registering event: ${event}`);
