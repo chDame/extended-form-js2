@@ -27,7 +27,12 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
-  const form = useService('form');
+  let form = null;
+  try {
+    form = useService('form');
+  } catch (error) {
+
+  }
   console.log("form");
   console.log(form);
   console.log("end form");
