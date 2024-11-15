@@ -1,5 +1,5 @@
 import { get, set } from "min-dash";
-import { FeelToggleSwitchEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
+import { FeelEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
 import { html } from "diagram-js/lib/ui";
 import { findGroupIdx } from "../utils";
 
@@ -87,7 +87,7 @@ function Src(props) {
 
   const debounce = (fn) => fn;
 
-  return html`<${FeelToggleSwitchEntry}
+  return html`<${FeelEntry}
     id=${id}
     element=${field}
     getValue=${getValue("optionsSrc")}
