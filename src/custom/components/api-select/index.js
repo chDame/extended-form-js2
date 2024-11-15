@@ -26,7 +26,8 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
-  const { initialData, data } = useService('form')._getState();
+  const form = useService('form');
+  const { initialData, data } = form !=null ? form._getState() : null;
 
   loadOptionsUrl = (expression, data = {}) => {
     console.log(expression);
@@ -64,15 +65,15 @@ export function ApiSelect(props) {
     'aria-invalid': errors.length > 0,
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
-
-  let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
-    this: data,
-    data: data,
-    i: [],
-    parent: null,
-  }));
-  console.log(url);
-
+  if (data) {
+    let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
+      this: data,
+      data: data,
+      i: [],
+      parent: null,
+    }));
+    console.log(url);
+  }
   field.values = [{ "label": "hard coded", "value": "hard" }];
 
   console.log("ApiSelect", selectProps);
