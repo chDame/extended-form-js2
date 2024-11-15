@@ -6,6 +6,7 @@ import {
   Select,
 } from "@bpmn-io/form-js";
 
+import { html } from "diagram-js/lib/ui";
 import { SearchableSelect } from "../shared/parts/SearchableSelect";
 import { SimpleSelect } from "../shared/parts/SimpleSelect";
 
@@ -41,21 +42,19 @@ export function ApiSelect(props) {
 
   console.log("ApiSelect", selectProps);
   
-  return (
-    <div
-      class={formFieldClasses(apiSelectType, { errors, disabled, readonly })}
+  return html`<div
+      class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
           event.preventDefault();
           event.stopPropagation();
         }
       }}>
-      <Label htmlFor={domId} label={label} required={required} />
-      {searchable ? <SearchableSelect {...selectProps} /> : <SimpleSelect {...selectProps} />}
-      <Description id={descriptionId} description={description} />
-      <Errors id={errorMessageId} errors={errors} />
-    </div>
-  );
+      <${Label} htmlFor=${domId} label=${label} required=${required} />
+      ${searchable ? <SearchableSelect {...selectProps} /> : <SimpleSelect {...selectProps} />}
+      <${Description} id=${descriptionId} description=${description} />
+      <${Errors} errors=${errors} id=${errorMessageId} />
+    </div>`;
 }
 
 ApiSelect.config = {
