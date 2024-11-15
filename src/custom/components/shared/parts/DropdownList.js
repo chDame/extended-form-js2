@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useState, useEffect, useCallback, useRef, useMemo } from 'preact/hooks';
 import { useKeyDownAction } from '../hooks';
+import { html } from "diagram-js/lib/ui";
 
 const DEFAULT_LABEL_GETTER = (value) => value;
 const NOOP = () => {};
@@ -101,26 +102,24 @@ export function DropdownList(props) {
     }
   };
 
-  return (
+  return html`
     <div
-      ref={dropdownContainer}
-      tabIndex={-1}
+      ref=${dropdownContainer}
+      tabIndex=${-1}
       class="fjs-dropdownlist"
-      onMouseDown={(e) => e.preventDefault()}
-      style={{ maxHeight: height, scrollBehavior: smoothScrolling ? 'smooth' : 'auto' }}>
-      {values.length > 0 &&
+      onMouseDown=${(e) => e.preventDefault()}
+      style=${{ maxHeight: height, scrollBehavior: smoothScrolling ? 'smooth' : 'auto' }}>
+      ${values.length > 0 &&
         values.map((v, i) => {
-          return (
+          return html`
             <div
-              class={classNames('fjs-dropdownlist-item', { focused: focusedValueIndex === i })}
-              onMouseMove={mouseControl ? undefined : (e) => onMouseMovedInKeyboardMode(e, i)}
-              onMouseEnter={mouseControl ? () => setFocusedValueIndex(i) : undefined}
-              onMouseDown={(e) => onValueSelected(v)}>
-              {getLabel(v)}
-            </div>
-          );
+              class=${classNames('fjs-dropdownlist-item', { focused: focusedValueIndex === i })}
+              onMouseMove=${mouseControl ? undefined : (e) => onMouseMovedInKeyboardMode(e, i)}
+              onMouseEnter=${mouseControl ? () => setFocusedValueIndex(i) : undefined}
+              onMouseDown=${(e) => onValueSelected(v)}>
+              ${getLabel(v)}
+            </div>`
         })}
-      {!values.length && <div class="fjs-dropdownlist-empty">{emptyListMessage}</div>}
-    </div>
-  );
+       ${!values.length && html`< div class="fjs-dropdownlist-empty" > ${emptyListMessage}</div >`}
+    </div>`;
 }
