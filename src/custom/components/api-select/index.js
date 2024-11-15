@@ -4,8 +4,7 @@ import {
   Label,
   sanitizeSingleSelectValue,
   Select,
-  useTemplateEvaluation,
-  useService
+  useTemplateEvaluation
 } from "@bpmn-io/form-js";
 import { unaryTest } from 'feelin';
 
@@ -27,15 +26,7 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
-  let form = null;
-  try {
-    form = useService('form');
-  } catch (error) {
 
-  }
-  console.log("form");
-  console.log(form);
-  console.log("end form");
   const isValidHttpUrl = (value) => {
     let url;
 
@@ -68,14 +59,11 @@ export function ApiSelect(props) {
     const optionsUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
     console.log(optionsUrl);
     if (isValidHttpUrl(optionsUrl)) {
-      try {
-        fetch(optionsUrl).then(response => {
-          console.log(response.json());
-          field.values = response.json();
-        });
-       
-      } catch (err) {
-      }
+      fetch(optionsUrl).then(response => {
+        field.values = response.json();
+      }).catch((error) => {
+        console.log(error)
+      });
     }
   }
 
