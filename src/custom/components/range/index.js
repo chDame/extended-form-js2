@@ -5,6 +5,9 @@ import {
   Description,
   Label,
 } from "@bpmn-io/form-js";
+
+import {formFieldClasses, prefixId} from "../utils";
+
 import { html, useContext } from "diagram-js/lib/ui";
 import classNames from "classnames";
 import RangeIcon from "../../../assets/svg/range.svg";
@@ -16,8 +19,7 @@ export const rangeType = "range";
  * This is the rendering part of the custom field. We use `htm` to
  * to render our components without the need of extra JSX transpilation.
  */
-export function RangeRenderer(props) {
-  console.log("RangeRenderer", props);
+export function Range(props) {
 
   // #region Constants
   const { disabled, errors = [], field, readonly, value } = props;
@@ -62,7 +64,7 @@ export function RangeRenderer(props) {
  * the schema type, UI label and icon, palette group, properties panel entries
  * and much more.
  */
-RangeRenderer.config = {
+Range.config = {
   /* we can extend the default configuration of existing fields */
   ...Numberfield.config,
   type: rangeType,
@@ -79,25 +81,3 @@ RangeRenderer.config = {
   ],
 };
 
-function formFieldClasses(
-  type,
-  { errors = [], disabled = false, readonly = false } = {}
-) {
-  if (!type) {
-    throw new Error("type required");
-  }
-
-  return classNames("fjs-form-field", `fjs-form-field-${type}`, {
-    "fjs-has-errors": errors.length > 0,
-    "fjs-disabled": disabled,
-    "fjs-readonly": readonly,
-  });
-}
-
-function prefixId(id, formId) {
-  if (formId) {
-    return `fjs-form-${formId}-${id}`;
-  }
-
-  return `fjs-form-${id}`;
-}
