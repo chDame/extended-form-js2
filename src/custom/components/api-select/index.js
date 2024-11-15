@@ -40,21 +40,11 @@ export function ApiSelect(props) {
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
 
+  field.values = [{ "label": "hard coded", "value": "hard" }];
+
   console.log("ApiSelect", selectProps);
   
-  return html`<div
-      class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }}>
-      <${Label} htmlFor=${domId} label=${label} required=${required} />
-      ${searchable ? <SearchableSelect {...selectProps} /> : <SimpleSelect {...selectProps} />}
-      <${Description} id=${descriptionId} description=${description} />
-      <${Errors} errors=${errors} id=${errorMessageId} />
-    </div>`;
+  return html`<div>test empty</div>`;
 }
 
 ApiSelect.config = {
