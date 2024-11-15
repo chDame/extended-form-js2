@@ -27,7 +27,7 @@ export function ApiSelect(props) {
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
   const form = useService('form');
-  const { initialData, data } = form !=null ? form._getState() : null;
+  const data = form !=null ? form._getState().data : null;
 
   loadOptionsUrl = (expression, data = {}) => {
     console.log(expression);
