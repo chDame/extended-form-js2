@@ -60,7 +60,9 @@ export function ApiSelect(props) {
     console.log(optionsUrl);
     if (isValidHttpUrl(optionsUrl)) {
       fetch(optionsUrl).then(response => {
-        field.values = response.json();
+        response.json().then(data => {
+          field.values = data;
+        });
       }).catch((error) => {
         console.log(error)
       });
