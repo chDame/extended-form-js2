@@ -5,12 +5,14 @@ import {
   sanitizeSingleSelectValue,
   Select,
 } from "@bpmn-io/form-js";
+import { unaryTest } from 'feelin';
 
 import { html } from "diagram-js/lib/ui";
 import { SearchableSelect } from "../shared/parts/SearchableSelect";
 import { SimpleSelect } from "../shared/parts/SimpleSelect";
 
-import { formFieldClasses, createEmptyOptions } from "../shared/utils";
+import { formFieldClasses, createEmptyOptions, buildExpressionContext } from "../shared/utils";
+import { useService } from "../shared/hooks";
 import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
 export const apiSelectType = 'apiSelect';
@@ -24,6 +26,29 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
+  const { initialData, data } = useService('form')._getState();
+
+  loadOptionsUrl = (expression, data = {}) => {
+    console.log(expression);
+    console.log(data);
+    if (!expression) {
+      return null;
+    }
+
+    if (!isString(expression) || !expression.startsWith('=')) {
+      return null;
+    }
+
+    try {
+      // cut off initial '='
+      const result = unaryTest(expression.slice(1), data);
+
+      return result;
+    } catch (error) {
+      this._eventBus.fire('error', { error });
+      return null;
+    }
+  }
 
   const selectProps = {
     domId,
@@ -40,9 +65,18 @@ export function ApiSelect(props) {
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
 
+  let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
+    this: data,
+    data: data,
+    i: [],
+    parent: null,
+  }));
+  console.log(url);
+
   field.values = [{ "label": "hard coded", "value": "hard" }];
 
   console.log("ApiSelect", selectProps);
+  console.log(selectProps.field.apiSelect.optionsSrc);
 
   return html`<div class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
       onKeyDown=${(event) => {
@@ -77,5 +111,6 @@ ApiSelect.config = {
     "description",
     "disabled",
     "readonly",
+    "required"
   ],
 };
