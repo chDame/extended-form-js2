@@ -70,7 +70,7 @@ ApiSelect.config = {
   create: (options = {}) => ({
     label: 'Select',
     ...createEmptyOptions(options),
-  }),,
+  }),
   propertiesPanelEntries: [
     "key",
     "label",
