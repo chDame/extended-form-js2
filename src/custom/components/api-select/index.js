@@ -85,7 +85,6 @@ export function ApiSelect(props) {
   field.values = [{ "label": "hard coded", "value": "hard" }];
 
   console.log("ApiSelect", selectProps);
-  console.log(selectProps.field.apiSelect.optionsSrc);
 
   return html`<div class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
       onKeyDown=${(event) => {
