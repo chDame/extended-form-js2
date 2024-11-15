@@ -157,8 +157,7 @@ export function SearchableSelect(props) {
     },
     [props],
   );
-  return html`<div>
-      <div
+  return html`<div
         class=${classNames('fjs-input-group', { disabled: disabled, readonly: readonly }, { hasErrors: errors.length })}>
         <input
           disabled=${disabled}
@@ -181,10 +180,10 @@ export function SearchableSelect(props) {
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
-            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}">
+            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}"/>
           </span>`}
         <span class="fjs-select-arrow" onMouseDown=${onAngelMouseDown}>
-          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}">
+          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}"/>
         </span>
       </div>
       <div class="fjs-select-anchor">
@@ -195,5 +194,5 @@ export function SearchableSelect(props) {
             onValueSelected=${selectOption}
             listenerElement=${searchbarRef.current}
           />`}
-      </div></div>`;
+      </div>`;
 }

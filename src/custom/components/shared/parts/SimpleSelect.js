@@ -108,12 +108,12 @@ export function SimpleSelect(props) {
     [props],
   );
 
-  return html`<div>prout<div
+  return html`<div
         ref=${selectRef}
         class=${classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
         onFocus=${onInputFocus}
         onBlur=${onInputBlur}
-        onMouseDown=${onMouseDown}>pouet
+        onMouseDown=${onMouseDown}>
         <div class=${classNames('fjs-select-display', { 'fjs-select-placeholder': !value })} id=${`${domId}-display`}>
           ${valueLabel || 'Select'}
         </div>
@@ -132,11 +132,11 @@ export function SimpleSelect(props) {
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
-            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}">
+            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}"/>
           </span>`
         }
         <span class="fjs-select-arrow">
-          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}">
+          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}"/>
         </span>
       </div>
       <div class="fjs-select-anchor">
@@ -147,6 +147,6 @@ export function SimpleSelect(props) {
             onValueSelected=${selectOption}
             listenerElement=${selectRef.current}
           />`}
-      </div></div>
+      </div>
     `
 }
