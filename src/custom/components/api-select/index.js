@@ -52,7 +52,7 @@ export function ApiSelect(props) {
       }
     }}>
       <${Label} htmlFor=${domId} label=${label} required=${required} />
-      <${searchable ? SearchableSelect : SimpleSelect} ${{...selectProps}} />
+      <${searchable ? SearchableSelect : SimpleSelect} ...${selectProps} />
       <${Description} id=${descriptionId} description=${description} />
       <${Errors} errors=${errors} id=${errorMessageId} />
     </div>`;
