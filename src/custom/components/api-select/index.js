@@ -13,7 +13,6 @@ import { SearchableSelect } from "../shared/parts/SearchableSelect";
 import { SimpleSelect } from "../shared/parts/SimpleSelect";
 
 import { formFieldClasses, createEmptyOptions, buildExpressionContext } from "../shared/utils";
-import { useService } from "../shared/hooks";
 import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
 export const apiSelectType = 'apiSelect';
@@ -28,29 +27,18 @@ export function ApiSelect(props) {
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
   const form = useService('form');
-  const data = form !=null ? form._getState().data : null;
 
 
-  const loadOptionsUrl = (expression, data = {}) => {
-    console.log(expression);
-    console.log(data);
-    if (!expression) {
-      return null;
-    }
-
-    if (!isString(expression) || !expression.startsWith('=')) {
-      return null;
-    }
+  const isValidHttpUrl = (value) => {
+    let url;
 
     try {
-      // cut off initial '='
-      const result = unaryTest(expression.slice(1), data);
-
-      return result;
-    } catch (error) {
-      this._eventBus.fire('error', { error });
-      return null;
+      url = new URL(value);
+    } catch (_) {
+      return false;
     }
+
+    return url.protocol === "http:" || url.protocol === "https:";
   }
 
   const selectProps = {
@@ -68,21 +56,19 @@ export function ApiSelect(props) {
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
 
+  field.values = [];
   if (selectProps.field.apiSelect && selectProps.field.apiSelect.optionsSrc) {
-    const testUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
-    console.log(testUrl);
-
-    if (data) {
-      let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
-        this: data,
-        data: data,
-        i: [],
-        parent: null,
-      }));
-      console.log(url);
+    const optionsUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
+    console.log(optionsUrl);
+    if (isValidHttpUrl(optionsUrl)) {
+      try {
+        let response = await fetch(computedDs);
+        console.log(response);
+        field.values = [{ "label": "hard coded", "value": "hard" }];
+      } catch (err) {
+      }
     }
   }
-  field.values = [{ "label": "hard coded", "value": "hard" }];
 
   console.log("ApiSelect", selectProps);
 
