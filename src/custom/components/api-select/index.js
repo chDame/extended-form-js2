@@ -4,6 +4,7 @@ import {
   Label,
   sanitizeSingleSelectValue,
   Select,
+  useTemplateEvaluation
 } from "@bpmn-io/form-js";
 import { unaryTest } from 'feelin';
 
@@ -29,7 +30,10 @@ export function ApiSelect(props) {
   const form = useService('form');
   const data = form !=null ? form._getState().data : null;
 
-  loadOptionsUrl = (expression, data = {}) => {
+  const testUrl = useTemplateEvaluation(expression, { debug: true, strict: true });
+  console.log(testUrl);
+
+  const loadOptionsUrl = (expression, data = {}) => {
     console.log(expression);
     console.log(data);
     if (!expression) {
