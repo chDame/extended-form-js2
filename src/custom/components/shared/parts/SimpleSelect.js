@@ -118,7 +118,7 @@ export function SimpleSelect(props) {
         <div class=${classNames('fjs-select-display', { 'fjs-select-placeholder': !value })} id=${`${domId}-display`}>
           ${valueLabel || 'Select'}
         </div>
-        ${!disabled && html`
+        ${!disabled && `
           <input
             ref=${inputRef}
             id=${domId}
@@ -129,7 +129,7 @@ export function SimpleSelect(props) {
             aria-describedby=${props['aria-describedby']}
           />`
         }
-        ${displayState.displayCross && html`
+        ${displayState.displayCross && `
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
@@ -141,7 +141,7 @@ export function SimpleSelect(props) {
         </span>
       </div>
       <div class="fjs-select-anchor">
-        ${displayState.displayDropdown && html`<${DropdownList}
+        ${displayState.displayDropdown && `<${DropdownList}
             values=${options}
             getLabel=${getLabel}
             initialFocusIndex=${initialFocusIndex}

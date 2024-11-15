@@ -177,7 +177,7 @@ export function SearchableSelect(props) {
           onBlur=${onInputBlur}
           aria-describedby=${props['aria-describedby']}
         />
-        ${displayState.displayCross && html`
+        ${displayState.displayCross && `
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
@@ -188,7 +188,7 @@ export function SearchableSelect(props) {
         </span>
       </div>
       <div class="fjs-select-anchor">
-        ${displayState.displayDropdown && html`
+        ${displayState.displayDropdown && `
           <${DropdownList}
             values=${filteredOptions}
             getLabel=${getLabel}
