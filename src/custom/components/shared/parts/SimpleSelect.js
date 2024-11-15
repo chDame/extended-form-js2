@@ -7,6 +7,7 @@ import XMarkIcon from '../../../../assets/svg/XMark.svg';
 import AngelDownIcon from '.../../../../assets/svg/AngelDown.svg';
 import AngelUpIcon from '../../../../assets/svg/AngelUp.svg';
 import { DropdownList } from './DropdownList';
+import { html } from "diagram-js/lib/ui";
 
 export function SimpleSelect(props) {
   const { domId, disabled, errors, onBlur, onFocus, field, readonly, value } = props;
@@ -132,7 +133,7 @@ export function SimpleSelect(props) {
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
-            <XMarkIcon />
+            <${XMarkIcon} />
           </span>`
         }
         <span class="fjs-select-arrow"><${displayState.displayDropdown ? AngelUpIcon : AngelDownIcon}/></span>

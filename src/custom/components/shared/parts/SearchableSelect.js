@@ -8,6 +8,7 @@ import XMarkIcon from '.../../../../assets/svg/XMark.svg';
 import AngelDownIcon from '../../../../assets/svg/AngelDown.svg';
 import AngelUpIcon from '../../../../assets/svg/AngelUp.svg';
 import { DropdownList } from './DropdownList';
+import { html } from "diagram-js/lib/ui";
 
 export function SearchableSelect(props) {
   const { domId, disabled, errors, onBlur, onFocus, field, readonly, value } = props;
@@ -137,54 +138,64 @@ export function SearchableSelect(props) {
     onBlur && onBlur();
   }, [onBlur, label]);
 
-  return (
+  const crossMouseDown = useCallback(
+    (e) => {
+      pickOption(null);
+      e.stopPropagation();
+    }, [onMouseDown, readonly]);
+
+  const getLabel = useCallback(
+    (option) => {
+      return option.label;
+    },
+    [props],
+  );
+  const selectOption = useCallback(
+    (option) => {
+      pickOption(option);
+      setIsDropdownExpanded(false);
+    },
+    [props],
+  );
+  return html`
     <>
       <div
-        class={classNames('fjs-input-group', { disabled: disabled, readonly: readonly }, { hasErrors: errors.length })}>
+        class=${classNames('fjs-input-group', { disabled: disabled, readonly: readonly }, { hasErrors: errors.length })}>
         <input
-          disabled={disabled}
-          readOnly={readonly}
+          disabled=${disabled}
+          readOnly=${readonly}
           class="fjs-input"
-          ref={searchbarRef}
-          id={domId}
-          onChange={onInputChange}
+          ref=${searchbarRef}
+          id=${domId}
+          onChange=${onInputChange}
           type="text"
-          value={filter}
+          value=${filter}
           placeholder={'Search'}
           autoComplete="off"
-          onKeyDown={onInputKeyDown}
-          onMouseDown={onInputMouseDown}
-          onFocus={onInputFocus}
-          onBlur={onInputBlur}
-          aria-describedby={props['aria-describedby']}
+          onKeyDown=${onInputKeyDown}
+          onMouseDown=${onInputMouseDown}
+          onFocus=${onInputFocus}
+          onBlur=${onInputBlur}
+          aria-describedby=${props['aria-describedby']}
         />
-        {displayState.displayCross && (
+        ${displayState.displayCross && html`
           <span
             class="fjs-select-cross"
-            onMouseDown={(e) => {
-              pickOption(null);
-              e.preventDefault();
-            }}>
-            <XMarkIcon />{' '}
-          </span>
-        )}
-        <span class="fjs-select-arrow" onMouseDown={(e) => onAngelMouseDown(e)}>
-          {displayState.displayDropdown ? <AngelUpIcon /> : <AngelDownIcon />}
+            onMouseDown=${crossMouseDown}>
+            <${XMarkIcon} />
+          </span>`}
+        <span class="fjs-select-arrow" onMouseDown=${onAngelMouseDown}>
+          <${displayState.displayDropdown ? AngelUpIcon : AngelDownIcon} />
         </span>
       </div>
       <div class="fjs-select-anchor">
-        {displayState.displayDropdown && (
-          <DropdownList
-            values={filteredOptions}
-            getLabel={(option) => option.label}
-            onValueSelected={(option) => {
-              pickOption(option);
-              setIsDropdownExpanded(false);
-            }}
-            listenerElement={searchbarRef.current}
-          />
-        )}
+        ${displayState.displayDropdown && html`
+          <${DropdownList}
+            values=${filteredOptions}
+            getLabel=${getLabel}
+            onValueSelected=${selectOption}
+            listenerElement=${searchbarRef.current}
+          />`}
       </div>
-    </>
-  );
+    </>`;
 }
