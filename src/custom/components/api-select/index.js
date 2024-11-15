@@ -68,17 +68,19 @@ export function ApiSelect(props) {
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
 
-  const testUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
-  console.log(testUrl);
+  if (selectProps.field.apiSelect && selectProps.field.apiSelect.optionsSrc) {
+    const testUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
+    console.log(testUrl);
 
-  if (data) {
-    let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
-      this: data,
-      data: data,
-      i: [],
-      parent: null,
-    }));
-    console.log(url);
+    if (data) {
+      let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
+        this: data,
+        data: data,
+        i: [],
+        parent: null,
+      }));
+      console.log(url);
+    }
   }
   field.values = [{ "label": "hard coded", "value": "hard" }];
 
