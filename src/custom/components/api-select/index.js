@@ -30,8 +30,6 @@ export function ApiSelect(props) {
   const form = useService('form');
   const data = form !=null ? form._getState().data : null;
 
-  const testUrl = useTemplateEvaluation(expression, { debug: true, strict: true });
-  console.log(testUrl);
 
   const loadOptionsUrl = (expression, data = {}) => {
     console.log(expression);
@@ -69,6 +67,10 @@ export function ApiSelect(props) {
     'aria-invalid': errors.length > 0,
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
+
+  const testUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
+  console.log(testUrl);
+
   if (data) {
     let url = loadOptionsUrl(selectProps.field.apiSelect.optionsSrc, buildExpressionContext({
       this: data,
