@@ -4,7 +4,8 @@ import {
   Label,
   sanitizeSingleSelectValue,
   Select,
-  useTemplateEvaluation
+  useTemplateEvaluation,
+  userService
 } from "@bpmn-io/form-js";
 import { unaryTest } from 'feelin';
 
@@ -26,8 +27,10 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
-
-
+  const form = useService('form');
+  console.log("form");
+  console.log(form);
+  console.log("end form");
   const isValidHttpUrl = (value) => {
     let url;
 
@@ -61,9 +64,9 @@ export function ApiSelect(props) {
     console.log(optionsUrl);
     if (isValidHttpUrl(optionsUrl)) {
       try {
-        fetch(computedDs).then(response => {
+        fetch(optionsUrl).then(response => {
           console.log(response.json());
-          field.values = [{ "label": "hard coded", "value": "hard" }];
+          field.values = response.json();
         });
        
       } catch (err) {
