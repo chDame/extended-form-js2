@@ -62,9 +62,11 @@ export function ApiSelect(props) {
     console.log(optionsUrl);
     if (isValidHttpUrl(optionsUrl)) {
       try {
-        let response = await fetch(computedDs);
-        console.log(response);
-        field.values = [{ "label": "hard coded", "value": "hard" }];
+        fetch(computedDs).then(response => {
+          console.log(response.json());
+          field.values = [{ "label": "hard coded", "value": "hard" }];
+        });
+       
       } catch (err) {
       }
     }
