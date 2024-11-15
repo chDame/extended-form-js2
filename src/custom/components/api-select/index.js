@@ -44,7 +44,18 @@ export function ApiSelect(props) {
 
   console.log("ApiSelect", selectProps);
   
-  return html`<div>test empty</div>`;
+  return html`<div class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }}>
+      <${Label} htmlFor=${domId} label=${label} required=${required} />
+      
+      <${Description} id=${descriptionId} description=${description} />
+      <${Errors} errors=${errors} id=${errorMessageId} />
+    </div>`;
 }
 
 ApiSelect.config = {
