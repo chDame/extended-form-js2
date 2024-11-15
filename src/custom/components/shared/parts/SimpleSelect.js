@@ -108,12 +108,12 @@ export function SimpleSelect(props) {
     [props],
   );
 
-  return html`<div><div
+  return html`<div>prout<div
         ref=${selectRef}
         class=${classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
         onFocus=${onInputFocus}
         onBlur=${onInputBlur}
-        onMouseDown=${onMouseDown}>
+        onMouseDown=${onMouseDown}>pouet
         <div class=${classNames('fjs-select-display', { 'fjs-select-placeholder': !value })} id=${`${domId}-display`}>
           ${valueLabel || 'Select'}
         </div>
