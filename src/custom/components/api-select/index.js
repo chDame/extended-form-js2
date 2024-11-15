@@ -26,7 +26,6 @@ export function ApiSelect(props) {
 
   const descriptionId = `${domId}-description`;
   const errorMessageId = `${domId}-error-message`;
-  const form = useService('form');
 
 
   const isValidHttpUrl = (value) => {
