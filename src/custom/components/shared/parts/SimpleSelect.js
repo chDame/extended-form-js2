@@ -38,6 +38,13 @@ export function SimpleSelect(props) {
     [props],
   );
 
+  const getLabel = useCallback(
+    (option) => {
+      return option.label;
+    },
+    [props],
+  );
+
   const displayState = useMemo(() => {
     const ds = {};
     ds.componentReady = !disabled && !readonly && loadState === LOAD_STATES.LOADED;
@@ -86,54 +93,58 @@ export function SimpleSelect(props) {
     }
   }, [onBlur, readonly]);
 
-  return (
-    <>
+  const crossMouseDown = useCallback(
+    (e) => {
+      pickOption(null);
+      e.stopPropagation();
+    }, [onMouseDown, readonly]);
+
+  const selectOption = useCallback(
+    (option) => {
+      pickOption(option);
+      setIsDropdownExpanded(false);
+    },
+    [props],
+  );
+
+  return html`<>
       <div
-        ref={selectRef}
-        class={classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
-        onFocus={onInputFocus}
-        onBlur={onInputBlur}
-        onMouseDown={onMouseDown}>
-        <div class={classNames('fjs-select-display', { 'fjs-select-placeholder': !value })} id={`${domId}-display`}>
-          {valueLabel || 'Select'}
+        ref=${selectRef}
+        class=${classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
+        onFocus=${onInputFocus}
+        onBlur=${onInputBlur}
+        onMouseDown=${onMouseDown}>
+        <div class=${classNames('fjs-select-display', { 'fjs-select-placeholder': !value })} id=${`${domId}-display`}>
+          ${valueLabel || 'Select'}
         </div>
-        {!disabled && (
+        ${!disabled && html`
           <input
-            ref={inputRef}
-            id={domId}
+            ref=${inputRef}
+            id=${domId}
             class="fjs-select-hidden-input"
-            value={valueLabel}
-            onFocus={onInputFocus}
-            onBlur={onInputBlur}
-            aria-describedby={props['aria-describedby']}
-          />
-        )}
-        {displayState.displayCross && (
+            value=${valueLabel}
+            onFocus=${onInputFocus}
+            onBlur=${onInputBlur}
+            aria-describedby=${props['aria-describedby']}
+          />`
+        }
+        ${displayState.displayCross && html`
           <span
             class="fjs-select-cross"
-            onMouseDown={(e) => {
-              pickOption(null);
-              e.stopPropagation();
-            }}>
+            onMouseDown=${crossMouseDown}>
             <XMarkIcon />
-          </span>
-        )}
-        <span class="fjs-select-arrow">{displayState.displayDropdown ? <AngelUpIcon /> : <AngelDownIcon />}</span>
+          </span>`
+        }
+        <span class="fjs-select-arrow"><${displayState.displayDropdown ? AngelUpIcon : AngelDownIcon}/></span>
       </div>
       <div class="fjs-select-anchor">
-        {displayState.displayDropdown && (
-          <DropdownList
-            values={options}
-            getLabel={(option) => option.label}
-            initialFocusIndex={initialFocusIndex}
-            onValueSelected={(option) => {
-              pickOption(option);
-              setIsDropdownExpanded(false);
-            }}
-            listenerElement={selectRef.current}
-          />
-        )}
+        ${displayState.displayDropdown && html`<${DropdownList}
+            values=${options}
+            getLabel=${getLabel}
+            initialFocusIndex=${initialFocusIndex}
+            onValueSelected=${selectOption}
+            listenerElement=${selectRef.current}
+          />`}
       </div>
-    </>
-  );
+    </>`
 }
