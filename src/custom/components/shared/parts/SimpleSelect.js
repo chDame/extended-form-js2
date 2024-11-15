@@ -108,8 +108,7 @@ export function SimpleSelect(props) {
     [props],
   );
 
-  return html`
-      <div
+  return html`<div><div
         ref=${selectRef}
         class=${classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
         onFocus=${onInputFocus}
@@ -148,6 +147,6 @@ export function SimpleSelect(props) {
             onValueSelected=${selectOption}
             listenerElement=${selectRef.current}
           />`}
-      </div>
+      </div></div>
     `
 }

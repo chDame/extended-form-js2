@@ -157,7 +157,7 @@ export function SearchableSelect(props) {
     },
     [props],
   );
-  return html`
+  return html`<div>
       <div
         class=${classNames('fjs-input-group', { disabled: disabled, readonly: readonly }, { hasErrors: errors.length })}>
         <input
@@ -195,6 +195,5 @@ export function SearchableSelect(props) {
             onValueSelected=${selectOption}
             listenerElement=${searchbarRef.current}
           />`}
-      </div>
-    `;
+      </div></div>`;
 }
