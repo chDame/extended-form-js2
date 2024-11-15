@@ -181,10 +181,10 @@ export function SearchableSelect(props) {
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
-            <${XMarkIcon} />
+            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}">
           </span>`}
         <span class="fjs-select-arrow" onMouseDown=${onAngelMouseDown}>
-          <${displayState.displayDropdown ? AngelUpIcon : AngelDownIcon} />
+          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}">
         </span>
       </div>
       <div class="fjs-select-anchor">

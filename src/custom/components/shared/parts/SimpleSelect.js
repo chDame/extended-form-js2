@@ -133,10 +133,12 @@ export function SimpleSelect(props) {
           <span
             class="fjs-select-cross"
             onMouseDown=${crossMouseDown}>
-            <${XMarkIcon} />
+            <img width="8" src="data:image/svg+xml,${encodeURIComponent(XMarkIcon)}">
           </span>`
         }
-        <span class="fjs-select-arrow"><${displayState.displayDropdown ? AngelUpIcon : AngelDownIcon}/></span>
+        <span class="fjs-select-arrow">
+          <img width="8" src="data:image/svg+xml,${encodeURIComponent(displayState.displayDropdown ? AngelUpIcon : AngelDownIcon)}">
+        </span>
       </div>
       <div class="fjs-select-anchor">
         ${displayState.displayDropdown && html`<${DropdownList}
