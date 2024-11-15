@@ -4,9 +4,9 @@ import { useService, useCleanupSingleSelectValue, useGetLabelCorrelation, useOpt
 
 import classNames from 'classnames';
 
-import XMarkIcon from '.../../../assets/svg/XMark.svg';
-import AngelDownIcon from '../../../assets/svg/AngelDown.svg';
-import AngelUpIcon from '../../../assets/svg/AngelUp.svg';
+import XMarkIcon from '.../../../../assets/svg/XMark.svg';
+import AngelDownIcon from '../../../../assets/svg/AngelDown.svg';
+import AngelUpIcon from '../../../../assets/svg/AngelUp.svg';
 import { DropdownList } from './DropdownList';
 
 export function SearchableSelect(props) {

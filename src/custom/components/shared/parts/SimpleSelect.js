@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { findIndex } from 'min-dash';
 import { useOptionsAsync, LOAD_STATES, useCleanupSingleSelectValue, useGetLabelCorrelation  } from '../hooks';
 
-import XMarkIcon from '../../../assets/svg/XMark.svg';
-import AngelDownIcon from '.../../../assets/svg/AngelDown.svg';
-import AngelUpIcon from '../../../assets/svg/AngelUp.svg';
+import XMarkIcon from '../../../../assets/svg/XMark.svg';
+import AngelDownIcon from '.../../../../assets/svg/AngelDown.svg';
+import AngelUpIcon from '../../../../assets/svg/AngelUp.svg';
 import { DropdownList } from './DropdownList';
 
 export function SimpleSelect(props) {

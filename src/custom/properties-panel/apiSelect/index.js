@@ -1,6 +1,7 @@
 import { get, set } from "min-dash";
 import { FeelToggleSwitchEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
 import { html } from "diagram-js/lib/ui";
+import { findGroupIdx } from "../utils";
 
 /*
  * This is a custom properties provider for the properties panel.
@@ -9,7 +10,7 @@ import { html } from "diagram-js/lib/ui";
 export class ApiSelectPropertiesProvider {
   constructor(propertiesPanel) {
     console.log("ApiSelectPropertiesProvider", propertiesPanel);
-    propertiesPanel.registerProvider(this, 500);
+    propertiesPanel.registerProvider(this, 501);
   }
 
   //#region Function
@@ -31,18 +32,18 @@ export class ApiSelectPropertiesProvider {
      * @return {Object[]} modified groups
      */
     return (groups) => {
-      if (field.type !== "apiSelect") {
-        return groups;
+      if (field.type === "apiSelect") {
+        const generalIdx = findGroupIdx(groups, "general");
+
+        /* insert apiSelect group after general */
+        groups.splice(generalIdx + 1, 0, {
+          id: "apiSelect",
+          label: "Api Select",
+          entries: ApiSelectEntries(field, editField),
+        });
       }
 
-      const generalIdx = findGroupIdx(groups, "general");
-
-      /* insert apiSelect group after general */
-      groups.splice(generalIdx + 1, 0, {
-        id: "apiSelect",
-        label: "Api Select",
-        entries: ApiSelectEntries(field, editField),
-      });
+      
 
       return groups;
     };
@@ -89,14 +90,9 @@ function Src(props) {
   return html`<${FeelToggleSwitchEntry}
     id=${id}
     element=${field}
-    getValue=${getValue("src")}
+    getValue=${getValue("optionsSrc")}
     label="API endpoint"
-    setValue=${onChange("src")}
+    setValue=${onChange("optionsSrc")}
     debounce=${debounce}
   />`;
-}
-
-
-function findGroupIdx(groups, id) {
-  return groups.findIndex((g) => g.id === id);
 }

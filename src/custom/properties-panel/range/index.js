@@ -4,7 +4,7 @@ import {
   isNumberFieldEntryEdited,
 } from "@bpmn-io/properties-panel";
 import { html } from "diagram-js/lib/ui";
-
+import { findGroupIdx } from "../utils";
 /*
  * This is a custom properties provider for the properties panel.
  * It adds a new group `Range` with range specific properties.
@@ -34,18 +34,16 @@ export class RangePropertiesProvider {
      * @return {Object[]} modified groups
      */
     return (groups) => {
-      if (field.type !== "range") {
-        return groups;
+      if (field.type === "range") {
+        const generalIdx = findGroupIdx(groups, "general");
+
+        /* insert range group after general */
+        groups.splice(generalIdx + 1, 0, {
+          id: "range",
+          label: "Range",
+          entries: RangeEntries(field, editField),
+        });
       }
-
-      const generalIdx = findGroupIdx(groups, "general");
-
-      /* insert range group after general */
-      groups.splice(generalIdx + 1, 0, {
-        id: "range",
-        label: "Range",
-        entries: RangeEntries(field, editField),
-      });
 
       return groups;
     };
@@ -144,8 +142,4 @@ function Step(props) {
     setValue=${onChange("step")}
     debounce=${debounce}
   />`;
-}
-
-function findGroupIdx(groups, id) {
-  return groups.findIndex((g) => g.id === id);
 }

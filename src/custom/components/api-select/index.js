@@ -6,15 +6,11 @@ import {
   Select,
 } from "@bpmn-io/form-js";
 
-import {
-  SearchableSelect
-} from "../parts/SearchableSelect";
-import {
-  SimpleSelect
-} from "../parts/SimpleSelect";
-import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
+import { SearchableSelect } from "../shared/parts/SearchableSelect";
+import { SimpleSelect } from "../shared/parts/SimpleSelect";
 
-import { formFieldClasses, prefixId, createEmptyOptions } from "../utils";
+import { formFieldClasses, createEmptyOptions } from "../shared/utils";
+import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
 export const apiSelectType = 'apiSelect';
 
@@ -62,7 +58,7 @@ export function ApiSelect(props) {
   );
 }
 
-Select.config = {
+ApiSelect.config = {
   ...Select.config,
   apiSelectType,
   keyed: true,

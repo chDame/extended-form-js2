@@ -6,10 +6,9 @@ import {
   Label,
 } from "@bpmn-io/form-js";
 
-import {formFieldClasses, prefixId} from "../utils";
+import { formFieldClasses, prefixId } from "../shared/utils";
 
 import { html, useContext } from "diagram-js/lib/ui";
-import classNames from "classnames";
 import RangeIcon from "../../../assets/svg/range.svg";
 import "../../../assets/css/range.css";
 
