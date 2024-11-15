@@ -21,7 +21,7 @@ export function SearchableSelect(props) {
   const searchbarRef = useRef();
   const eventBus = useService('eventBus');
 
-  const { loadState, options } = useOptionsAsync(field);
+  const { loadState, options } = buildLoadedState(field.values);//useOptionsAsync(field);
 
   useCleanupSingleSelectValue({
     field,
