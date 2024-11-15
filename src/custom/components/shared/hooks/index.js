@@ -191,6 +191,6 @@ export function useOptionsAsync(field) {
   return optionsGetter;
 }
 
-export function buildErrorState = (error) => ({ options: [], error, loadState: LOAD_STATES.ERROR });
+export const buildErrorState = (error) => ({ options: [], error, loadState: LOAD_STATES.ERROR });
 
-export function buildLoadedState = (options) => ({ options, error: undefined, loadState: LOAD_STATES.LOADED });
+export const buildLoadedState = (options) => ({ options, error: undefined, loadState: LOAD_STATES.LOADED });
