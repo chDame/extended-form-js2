@@ -108,7 +108,7 @@ export function SimpleSelect(props) {
     [props],
   );
 
-  return `
+  return html`
       <div
         ref=${selectRef}
         class=${classNames('fjs-input-group', { disabled, readonly }, { hasErrors: errors.length })}
