@@ -5,7 +5,7 @@ import {
   sanitizeSingleSelectValue,
   Select,
   useTemplateEvaluation,
-  userService
+  useService
 } from "@bpmn-io/form-js";
 import { unaryTest } from 'feelin';
 
