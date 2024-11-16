@@ -50,7 +50,7 @@ class BaseForm {
     this.customForm.setProperty(key, value);
   }
 
-  attachTo(parentNode: HTMLElement) {
+  attachTo(parentNode) {
     this.customForm.attachTo(parentNode);
   }
 
