@@ -16,6 +16,7 @@ import { formFieldClasses, createEmptyOptions, buildExpressionContext } from "..
 import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
 export const apiSelectType = 'apiSelect';
+export const selectUrls = {};
 
 export function ApiSelect(props) {
   const { disabled, errors = [], domId, onBlur, onFocus, field, onChange, readonly, value } = props;
@@ -54,11 +55,11 @@ export function ApiSelect(props) {
     'aria-describedby': [descriptionId, errorMessageId].join(' '),
   };
 
-  field.values = [];
+  
   if (selectProps.field.apiSelect && selectProps.field.apiSelect.optionsSrc) {
     const optionsUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
-    console.log(optionsUrl);
-    if (isValidHttpUrl(optionsUrl)) {
+    if ((!selectUrls[domId] || optionsUrl !== selectUrls[domId]) && isValidHttpUrl(optionsUrl)) {
+      field.values = [];
       fetch(optionsUrl).then(response => {
         response.json().then(data => {
           field.values = data;
