@@ -59,6 +59,7 @@ export function ApiSelect(props) {
   if (selectProps.field.apiSelect && selectProps.field.apiSelect.optionsSrc) {
     const optionsUrl = useTemplateEvaluation(selectProps.field.apiSelect.optionsSrc, { debug: true, strict: true });
     if ((!selectUrls[domId] || optionsUrl !== selectUrls[domId]) && isValidHttpUrl(optionsUrl)) {
+      selectUrls[domId] = optionsUrl;
       field.values = [];
       fetch(optionsUrl).then(response => {
         response.json().then(data => {
