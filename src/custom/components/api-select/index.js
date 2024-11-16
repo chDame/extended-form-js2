@@ -71,8 +71,6 @@ export function ApiSelect(props) {
     }
   }
 
-  console.log("ApiSelect", selectProps);
-
   return html`<div class=${formFieldClasses(apiSelectType, { errors, disabled, readonly })}
       onKeyDown=${(event) => {
       if (event.key === 'Enter') {

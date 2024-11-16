@@ -41,6 +41,19 @@ class BaseForm {
       this.customForm.on(event, args[0], args[1]); // prio and callback
     }
   }
+
+  reset() {
+    this.customForm.reset();
+  }
+
+  setProperty(key, value) {
+    this.customForm.setProperty(key, value);
+  }
+
+  attachTo(parentNode: HTMLElement) {
+    this.customForm.attachTo(parentNode);
+  }
+
 }
 
 export default BaseForm;
