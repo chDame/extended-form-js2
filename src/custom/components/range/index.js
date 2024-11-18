@@ -20,7 +20,7 @@ export const rangeType = "range";
 export function Range(props) {
 
   // #region Constants
-  const { disabled, errors = [], domId, onBlur, onFocus, field, onChange, readonly, value } = props;
+  const { disabled, errors = [], domId, field, readonly, value } = props;
  
   const { description, range = {}, id, label } = field;
   const { min, max, step } = range;
