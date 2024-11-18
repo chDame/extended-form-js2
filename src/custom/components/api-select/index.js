@@ -14,7 +14,7 @@ import { SimpleSelect } from "../shared/parts/SimpleSelect";
 import { formFieldClasses, createEmptyOptions } from "../shared/utils";
 import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
-export const apiSelectType = 'apiSelect';
+export const apiSelectType = 'apiSelectField';
 export const selectUrls = {};
 
 export function ApiSelect(props) {

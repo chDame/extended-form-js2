@@ -14,7 +14,7 @@ class ApiSelectField {
 }
 
 export const RenderExtension = {
-  __init__: ["rangeField", "apiSelectField"],
+  __init__: [rangeType, apiSelectType],
   rangeField: ["type", RangeField],
   apiSelectField: ["type", ApiSelectField],
 };

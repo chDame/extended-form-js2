@@ -12,7 +12,7 @@ import { html, useContext } from "diagram-js/lib/ui";
 import RangeIcon from "../../../assets/svg/range.svg";
 import "../../../assets/css/range.css";
 
-export const rangeType = "range";
+export const rangeType = "rangeField";
 
 /*
  * This is the rendering part of the custom field. We use `htm` to

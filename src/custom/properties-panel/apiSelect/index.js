@@ -2,6 +2,7 @@ import { get, set } from "min-dash";
 import { FeelEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
 import { html } from "diagram-js/lib/ui";
 import { findGroupIdx } from "../utils";
+import { apiSelectType } from "../../components/api-select";
 
 /*
  * This is a custom properties provider for the properties panel.
@@ -32,7 +33,7 @@ export class ApiSelectPropertiesProvider {
      * @return {Object[]} modified groups
      */
     return (groups) => {
-      if (field.type === "apiSelect") {
+      if (field.type === apiSelectType) {
         const generalIdx = findGroupIdx(groups, "general");
 
         /* insert apiSelect group after general */

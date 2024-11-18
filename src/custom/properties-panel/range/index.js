@@ -5,6 +5,7 @@ import {
 } from "@bpmn-io/properties-panel";
 import { html } from "diagram-js/lib/ui";
 import { findGroupIdx } from "../utils";
+import { rangeType } from "../../components/range";
 /*
  * This is a custom properties provider for the properties panel.
  * It adds a new group `Range` with range specific properties.
@@ -34,7 +35,7 @@ export class RangePropertiesProvider {
      * @return {Object[]} modified groups
      */
     return (groups) => {
-      if (field.type === "range") {
+      if (field.type === rangeType) {
         const generalIdx = findGroupIdx(groups, "general");
 
         /* insert range group after general */
