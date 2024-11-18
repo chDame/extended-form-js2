@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 
-import { useService, useCleanupSingleSelectValue, useGetLabelCorrelation, useOptionsAsync, LOAD_STATES } from '../hooks';
+import { useService, useCleanupSingleSelectValue, useGetLabelCorrelation, LOAD_STATES } from '../hooks';
 
 import classNames from 'classnames';
 
@@ -22,7 +22,7 @@ export function SearchableSelect(props) {
   const searchbarRef = useRef();
   const eventBus = useService('eventBus');
 
-  const { loadState, options } = buildLoadedState(field.values);//useOptionsAsync(field);
+  const { loadState, options } = buildLoadedState(field.values);
 
   useCleanupSingleSelectValue({
     field,

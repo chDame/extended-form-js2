@@ -6,13 +6,12 @@ import {
   Select,
   useTemplateEvaluation
 } from "@bpmn-io/form-js";
-import { unaryTest } from 'feelin';
 
 import { html } from "diagram-js/lib/ui";
 import { SearchableSelect } from "../shared/parts/SearchableSelect";
 import { SimpleSelect } from "../shared/parts/SimpleSelect";
 
-import { formFieldClasses, createEmptyOptions, buildExpressionContext } from "../shared/utils";
+import { formFieldClasses, createEmptyOptions } from "../shared/utils";
 import ApiSelectIcon from "../../../assets/svg/apiSelect.svg";
 
 export const apiSelectType = 'apiSelect';

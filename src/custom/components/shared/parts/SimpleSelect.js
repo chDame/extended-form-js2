@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'preact/hooks';
 import classNames from 'classnames';
 import { findIndex } from 'min-dash';
-import { useOptionsAsync, buildLoadedState, LOAD_STATES, useCleanupSingleSelectValue, useGetLabelCorrelation  } from '../hooks';
+import { buildLoadedState, LOAD_STATES, useCleanupSingleSelectValue, useGetLabelCorrelation  } from '../hooks';
 
 import XMarkIcon from '../../../../assets/svg/XMark.svg';
 import AngelDownIcon from '.../../../../assets/svg/AngelDown.svg';
@@ -18,7 +18,7 @@ export function SimpleSelect(props) {
   /** @type {import("preact").RefObject<HTMLInputElement>} */
   const inputRef = useRef();
 
-  const { loadState, options } = buildLoadedState(field.values);// useOptionsAsync(field);
+  const { loadState, options } = buildLoadedState(field.values);
 
   useCleanupSingleSelectValue({
     field,

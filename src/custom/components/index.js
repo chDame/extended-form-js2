@@ -1,10 +1,8 @@
 import { Range, rangeType } from "./range";
 import { ApiSelect, apiSelectType } from "./api-select";
 
-class RangeField {
-  constructor(formFields) {
-    formFields.register(rangeType, Range);
-  }
+function RangeField(formFields) {
+  formFields.register(rangeType, Range);
 }
 
 class ApiSelectField {

@@ -1,14 +1,13 @@
 import {
   Errors,
-  FormContext,
   Numberfield,
   Description,
   Label,
 } from "@bpmn-io/form-js";
 
-import { formFieldClasses, prefixId } from "../shared/utils";
+import { formFieldClasses } from "../shared/utils";
 
-import { html, useContext } from "diagram-js/lib/ui";
+import { html } from "diagram-js/lib/ui";
 import RangeIcon from "../../../assets/svg/range.svg";
 import "../../../assets/css/range.css";
 
@@ -21,12 +20,12 @@ export const rangeType = "range";
 export function Range(props) {
 
   // #region Constants
-  const { disabled, errors = [], field, readonly, value } = props;
+  const { disabled, errors = [], domId, onBlur, onFocus, field, onChange, readonly, value } = props;
+ 
   const { description, range = {}, id, label } = field;
   const { min, max, step } = range;
-  const { formId } = useContext(FormContext);
-  const errorMessageId =
-    errors.length === 0 ? undefined : `${prefixId(id, formId)}-error-message`;
+  const descriptionId = `${domId}-description`;
+  const errorMessageId = `${domId}-error-message`;
   // #endregion
 
   const onChange = ({ target }) => {
@@ -38,12 +37,12 @@ export function Range(props) {
   };
 
   return html`<div class=${formFieldClasses(rangeType)}>
-    <${Label} id=${prefixId(id, formId)} label=${label} />
+    <${Label} label=${label} />
     <div class="range-group">
       <input
         type="range"
         disabled=${disabled}
-        id=${prefixId(id, formId)}
+        id=${domId}
         max=${max}
         min=${min}
         onInput=${onChange}
@@ -53,7 +52,7 @@ export function Range(props) {
       />
       <div class="range-value">${value}</div>
     </div>
-    <${Description} description=${description} />
+    <${Description} id=${descriptionId} description=${description} />
     <${Errors} errors=${errors} id=${errorMessageId} />
   </div>`;
 }
