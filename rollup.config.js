@@ -3,6 +3,7 @@ import commonjs from "@rollup/plugin-commonjs"; // convert CommonJS modules to E
 import babel from "@rollup/plugin-babel"; // transpiling modern JS and JSX
 import svg from "rollup-plugin-svg"; // import svg files
 import postcss from "rollup-plugin-postcss"; // process CSS
+import { terser } from "rollup-plugin-terser"; // code minification
 import alias from "@rollup/plugin-alias"; // manage paths and aliases
 import replace from "@rollup/plugin-replace"; // replace variables in code
 
@@ -54,7 +55,14 @@ export default {
       extract: "assets/styles.css",
     }),
     svg(),
-    production,
+    production &&
+      terser({
+        mangle: {
+          reserved: ["apiSelectField", "ApiSelectField", "rangeField", "RangeField", "formFields.register", "formFields"],
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+      }),
   ],
   external: [
   ],
