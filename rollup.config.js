@@ -55,14 +55,7 @@ export default {
       extract: "assets/styles.css",
     }),
     svg(),
-    production &&
-      terser({
-        mangle: {
-          reserved: ["RangeField", "formFields.register", "formFields"],
-          keep_classnames: true,
-          keep_fnames: true,
-        },
-      }),
+    production,
   ],
   external: [
   ],
