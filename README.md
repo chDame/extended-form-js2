@@ -2,7 +2,13 @@
 
 This is an example of a library of custom components on top of @bpmn-io/form-js.
 
-## Display a form <a id="viewer" />
+## How to use it in a react/angular/vue project ?
+
+```bash
+npm i @camunda-community/form-js-extended
+```
+
+### Display a form <a id="viewer" />
 
 Renders a form. **Note** : newForm method returns a native @bpmn-io/form-js Form object.
 
@@ -20,24 +26,6 @@ form.on('submit', (event) => {
   console.log(event.data, event.errors);
 });
 ```
-
-## Display a form <a id="viewer" />
-
-Renders a form. **Note** : newForm method returns a native @bpmn-io/form-js Form object.
-
-```javascript
-import { newForm } from '@camunda-community/form-js-extended';
-import { Form } from '@bpmn-io/form-js';
-
-const form = newForm({
-  container: document.querySelector('#form'),
-});
-
-await form.importSchema(schema, data);
-
-form.on('submit', (event) => {
-  console.log(event.data, event.errors);
-});
 
 ### Create and edit a form <a id="builder" />
 
@@ -78,9 +66,3 @@ In there, you'll find the specific "groups" used in the FormEditor for the compo
 1. Add a folder with your component name in components. Add an index.js file into it that will contain your component code..
 2. Add the component into the RenderExtension in custom/components/index.js
 3. If this component requires some specific configurations, add a folder in custom/properties-panel and register it in the PropertiesPanelExtension in custom/properties-panel/index.js
-
-## How to use it in a react/angular/vue project ?
-
-```bash
-npm i @camunda-community/form-js-extended
-```
