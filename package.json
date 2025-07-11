@@ -1,6 +1,6 @@
 {
     "name": "@camunda-community/form-js-extended",
-    "version": "1.15.2",
+    "version": "1.15.3",
     "description": "An extension library for @bpmn.io/form-js that provides custom form editor functionalities",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
