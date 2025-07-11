@@ -62,9 +62,13 @@ export function ApiSelect(props) {
       selectUrls[domId] = optionsUrl;
       field.values = [];
       fetch(optionsUrl).then(response => {
-        response.json().then(data => {
-          field.values = data;
-        });
+        if (response.ok) {
+          response.json().then(data => {
+            field.values = data;
+          });
+        } else {
+          console.log(response);
+        }
       }).catch((error) => {
         console.log(error)
       });
