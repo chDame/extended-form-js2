@@ -62,7 +62,7 @@ export function ApiSelect(props) {
       selectUrls[domId] = optionsUrl;
       field.values = [];
       fetch(optionsUrl).then(response => {
-        if (response.ok) {
+        if (response.ok && response.headers.get('content-type') && response.headers.get('content-type').includes('application/json')) {
           response.json().then(data => {
             field.values = data;
           });
