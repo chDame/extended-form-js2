@@ -120,6 +120,6 @@ export function DropdownList(props) {
               ${getLabel(v)}
             </div>`
         })}
-       ${!values.length && html`< div class="fjs-dropdownlist-empty" > ${emptyListMessage}</div >`}
+       ${!values.length && html`<div class="fjs-dropdownlist-empty">${emptyListMessage}</div>`}
     </div>`;
 }
